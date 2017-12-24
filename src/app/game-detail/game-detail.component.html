@@ -2,7 +2,7 @@
   <div class="row">
     <h3>Game {{game.id}}</h3>
     <div class="col-xs-8 col-xs-offset-2">
-      <p>mensajes</p>
+      <p *ngFor="let message of messages">{{message.text}}</p>
     </div>
   </div>
 </div>
