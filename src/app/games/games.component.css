@@ -1,0 +1,11 @@
+.divGame {
+  padding: 5px;
+}
+.linkGame {
+  display: inline-block;
+  background-color: darkslateblue;
+  color: white;
+  padding: 7px;
+  border-radius: 5px;
+  font-size: 2rem;
+}

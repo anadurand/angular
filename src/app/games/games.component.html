@@ -1,9 +1,12 @@
 <div class="container">
   <h2>Lista de Juegos</h2>
-  <div class="row" *ngFor="let game of games" onclick="showDetail()">
-    <a href="" class="col-xs-12 col-sm-3">
-      Juego {{game.id}}
-    </a>
+  <div class="row" >
+    <div class="col-xs-12 col-sm-2 divGame" *ngFor="let i of games" >
+      <a href="" class="linkGame" onclick="showDetail()">
+        Juego {{ i.id | json}}
+      </a>
+    </div>
+
 
   </div>
 </div>
