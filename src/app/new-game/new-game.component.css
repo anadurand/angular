@@ -1,0 +1,8 @@
+.newgame-container {
+  margin-top: 50px;
+}
+.messages {
+  height: 50vh;
+  border: 1px solid lightgrey;
+  margin-bottom: 30px;
+}
