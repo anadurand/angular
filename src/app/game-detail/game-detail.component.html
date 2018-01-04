@@ -1,8 +1,8 @@
 <div class="container" *ngIf="game">
-  <div class="row">
-    <h3 class="text-center">Juego {{game.id}} Resultado final:</h3>
+  <div class="row" *ngFor="let actualgame of game">
+    <h3 class="text-center">Juego {{actualgame.id}} Resultado final:</h3>
     <div class="col-xs-12 center-block">
-      <p *ngFor="let message of game.messages" class="text-center">{{message}}</p>
+      <p *ngFor="let message of actualgame.messages" class="text-center">{{message}}</p>
     </div>
   </div>
   <button (click) = "goBack()" class="btn btn-default btn-sm">Página Anterior</button>

@@ -26,6 +26,7 @@ export class GameDetailComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.gameService.getGame(id)
       .subscribe(game => this.game = game);
+
   }
   goBack(): void {
     this.location.back();

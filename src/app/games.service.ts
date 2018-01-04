@@ -14,12 +14,14 @@ export class GamesService {
     this.db.collection('gamestatus').valueChanges().subscribe((gamestatus: any)=> this.gamestatus = gamestatus);
 
   }
-  getGames(): Observable<Game[]> {
-    return of (this.games);
+  getGames(): Observable<any> {
+    return this.db.collection('games').valueChanges();
   }
-  getGame(id: number): Observable<Game> {
-    return of (this.games.find(game => game.id === id));
+  getGame(id: number): Observable<any> {
+    return this.db.collection('games', ref => ref.where('id' , '==' , id)).valueChanges();
   }
+
+
 
 
 
