@@ -4,8 +4,9 @@
       <div class="reloj">
 
       </div>
+      <h3>Juego número {{newGame.id}}</h3>
       <div class="messages">
-        <div *ngFor="let message of messages">
+        <div *ngFor="let message of newGame.messages">
           <p >{{message}}</p>
         </div>
       </div>
@@ -15,7 +16,7 @@
             <label for="message"></label>
             <input type="text" class="form-control" id="message">
           </div>
-          <button type="submit" class="btn btn-default" (click)="sendPost()">Exviar</button>
+          <button type="submit" class="btn btn-default" (click)="sendText()">Exviar</button>
         </form>
       </div>
     </div>
