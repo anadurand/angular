@@ -18,6 +18,13 @@ export class GamesService {
   getGame(id: number): Observable<any> {
     return this.db.collection('games', ref => ref.where('id' , '==' , id)).valueChanges();
   }
+  getGameStatus(): Observable<any> {
+    return this.db.collection('gamestatus').valueChanges();
+  }
+  changeGameStatus(status: boolean): Observable<any> {
+    this.db.collection('gamestatus').doc('status').update(status);
+    return this.db.collection('gamestatus').valueChanges();
+  }
 
 
 
