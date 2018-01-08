@@ -8,6 +8,7 @@ import {of} from "rxjs/observable/of";
 export class GamesService {
   gameId;
   gameStatus: any;
+  
 
   constructor(private db: AngularFirestore) {
 
@@ -48,14 +49,7 @@ export class GamesService {
     })
   }
 
-  sendMessages(messagesArray, id: number): void {
 
-    this.db.collection('games', ref => ref.where('id' , '==' , id)).update( {
-      "messages": messagesArray
-    });
-
-
-  }
 
 
 

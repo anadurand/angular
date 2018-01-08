@@ -35,9 +35,8 @@ export class ShowGameComponent implements OnInit {
       .subscribe( game => this.actualGame = game);
   }
   sendMessage(message): void {
+    
     this.actualGame[0].messages.push(message);
-
-    this.gamesService.sendMessages(this.actualGame[0].messages, this.gameStatus[0].nextgameid -1);
   }
 
 
