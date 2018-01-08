@@ -20,11 +20,15 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
     this.getGameStatus();
+    this.getId();
   }
 
   getGameStatus(): void {
     this.gamesService.getGameStatus()
       .subscribe(gameStatus => this.gameStatus = gameStatus);
 
+  }
+  getId(): void {
+    this.gamesService.getGameId();
   }
 }

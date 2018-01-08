@@ -8,14 +8,31 @@ import {GamesService} from "../games.service";
   styleUrls: ['./new-game.component.css']
 })
 export class NewGameComponent implements OnInit {
-  @Input() gameStatus: GameStatus;
+  gameStatus: GameStatus;
 
   constructor(private gamesService: GamesService) { }
 
   ngOnInit() {
-    console.log(this.gameStatus);
+    this.getGameStatus();
+    this.newGame();
 
   }
+
+  newGame(): void {
+    this.gamesService.newGame();
+    this.gamesService.changeStatus();
+
+  }
+  getGameStatus(): void {
+    this.gamesService.getGameStatus()
+      .subscribe(gameStatus => this.gameStatus = gameStatus);
+
+  }
+
+
+
+
+
 
 
 

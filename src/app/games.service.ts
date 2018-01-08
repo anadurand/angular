@@ -6,7 +6,8 @@ import {of} from "rxjs/observable/of";
 
 @Injectable()
 export class GamesService {
-
+  gameId;
+  gameStatus: any;
 
   constructor(private db: AngularFirestore) {
 
@@ -18,14 +19,46 @@ export class GamesService {
     return this.db.collection('games', ref => ref.where('id' , '==' , id)).valueChanges();
   }
   getGameStatus(): Observable<any> {
-
     return this.db.collection('gamestatus').valueChanges();
 
   }
+  newGame(): void {
+    this.gameId = this.gameStatus[0].nextgameid;
+    this.db.collection('games').add({
+      id: this.gameId,
+      messages: []
+    });
+    this.updatedId(this.gameId);
 
-  addGame() {
-    //this.db.collection('games').add('id': gameId, 'messages': []);
   }
+  getGameId() {
+    this.db.collection('gamestatus').valueChanges()
+      .subscribe(gameStatus => this.gameStatus = gameStatus);
+
+  }
+  updatedId(actualId) {
+    this.db.collection('gamestatus').doc('status').update({
+      "nextgameid": actualId +1
+    })
+  }
+
+  changeStatus() {
+    this.db.collection('gamestatus').doc('status').update({
+      "active": !this.gameStatus[0].active
+    })
+  }
+
+  sendMessages(messagesArray, id: number): void {
+
+    this.db.collection('games', ref => ref.where('id' , '==' , id)).update( {
+      "messages": messagesArray
+    });
+
+
+  }
+
+
+
 
 
 

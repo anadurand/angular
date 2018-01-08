@@ -12,6 +12,8 @@ import {AngularFireModule} from "angularfire2";
 import {environment} from "../environments/environment";
 import {HttpClientModule} from "@angular/common/http";
 import {AngularFirestoreModule} from "angularfire2/firestore";
+import { ShowGameComponent } from './show-game/show-game.component';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -19,14 +21,16 @@ import {AngularFirestoreModule} from "angularfire2/firestore";
     AppComponent,
     GamesComponent,
     GameDetailComponent,
-    NewGameComponent
+    NewGameComponent,
+    ShowGameComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    FormsModule
   ],
   providers: [GamesService],
   bootstrap: [AppComponent]
