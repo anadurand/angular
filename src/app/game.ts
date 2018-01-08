@@ -4,5 +4,5 @@ export interface Game {
 }
 export interface  GameStatus {
   active: boolean;
-  nextgameid: number;
+  nextId: number;
 }

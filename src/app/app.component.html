@@ -5,6 +5,7 @@
 
 <nav class="container btn-nav">
   <a class="btn btn-primary" routerLink="/gamesList">Lista de Juegos</a>
-  <a class="btn btn-success" routerLink="/newGame"> Nuevo Juego</a>
+  <a class="btn btn-success" routerLink="/newGame"><span [class.hidden]="gameStatus[0].active === true"> Nuevo </span>Juego <span [class.hidden]="gameStatus[0].active === false"> en curso</span></a>
+{{gameStatus | json}}
 </nav>
 <router-outlet></router-outlet>
