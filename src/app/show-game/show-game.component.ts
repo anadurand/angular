@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, DoCheck, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {Game, GameStatus} from "../game";
 import {GamesService} from "../games.service";
 import {ActivatedRoute, Router} from "@angular/router";
+
 
 @Component({
   selector: 'app-show-game',
@@ -13,6 +14,7 @@ export class ShowGameComponent implements OnInit {
   gameStatus: GameStatus;
   realGame: Game;
   post: string;
+  remainingTime: number;
 
   constructor(
     private gamesService: GamesService,
@@ -23,8 +25,11 @@ export class ShowGameComponent implements OnInit {
   ngOnInit() {
     this.getGameStatus();
     this.getGameNew();
-
+    this.remainingTime = 120;
+    this.countDown();
   }
+
+
   getGameStatus(): void {
     this.gamesService.getGameStatus()
       .subscribe(gameStatus => this.gameStatus = gameStatus);
@@ -48,6 +53,23 @@ export class ShowGameComponent implements OnInit {
   backToList() {
     this.router.navigate(['/gamesList']);
   }
+
+  countDown() {
+    var time = this.remainingTime;
+    var id = setInterval(discount, 1000);
+    function discount() {
+      if(time == 0) {
+        clearInterval(id);
+        console.log('game end');
+        this.endGame();
+      }else {
+        time--;
+        this.remainingTime = this.remainingTime -1;
+      }
+    }
+
+  }
+
 
 
 }
