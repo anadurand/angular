@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
 })
 export class GameDetailComponent implements OnInit {
 
-  @Input() game: Game;
+  game: Game;
 
   constructor(
     private route: ActivatedRoute,

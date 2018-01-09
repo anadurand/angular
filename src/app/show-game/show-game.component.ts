@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Game, GameStatus} from "../game";
 import {GamesService} from "../games.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-show-game',
@@ -11,17 +11,18 @@ import {ActivatedRoute} from "@angular/router";
 export class ShowGameComponent implements OnInit {
 
   gameStatus: GameStatus;
-  actualGame: Game;
-
+  realGame: Game;
+  post: string;
 
   constructor(
     private gamesService: GamesService,
+    private router: Router,
     private route: ActivatedRoute
     ) { }
 
   ngOnInit() {
     this.getGameStatus();
-    this.getGame();
+    this.getGameNew();
 
   }
   getGameStatus(): void {
@@ -29,14 +30,23 @@ export class ShowGameComponent implements OnInit {
       .subscribe(gameStatus => this.gameStatus = gameStatus);
 
   }
-  getGame(): void {
+
+  getGameNew(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.gamesService.getGame(id)
-      .subscribe( game => this.actualGame = game);
+    this.gamesService.getGameById(id)
+      .subscribe(game => this.realGame = game);
   }
-  sendMessage(message): void {
-    
-    this.actualGame[0].messages.push(message);
+  sendMessage(docId): void {
+    this.realGame[0].data.messages.push(this.post);
+    this.post = "";
+    this.gamesService.saveMessage(this.realGame[0].data.messages, docId);
+  }
+  endGame(): void {
+    this.gamesService.changeStatus();
+    this.backToList();
+  }
+  backToList() {
+    this.router.navigate(['/gamesList']);
   }
 
 

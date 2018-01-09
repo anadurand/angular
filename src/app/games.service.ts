@@ -8,9 +8,11 @@ import {of} from "rxjs/observable/of";
 export class GamesService {
   gameId;
   gameStatus: any;
-  
+  allGamesCollection: AngularFirestoreCollection<Game>;
+  allGames: any;
 
   constructor(private db: AngularFirestore) {
+
 
   }
   getGames(): Observable<any> {
@@ -23,10 +25,22 @@ export class GamesService {
     return this.db.collection('gamestatus').valueChanges();
 
   }
+  getGameById(id:number): Observable<any> {
+    this.allGamesCollection = this.db.collection<Game>('games', ref => ref.where('id', '==', id));
+    this.allGames = this.allGamesCollection.snapshotChanges().map( actions => {
+              return actions.map( action => {
+                const data = action.payload.doc.data();
+                const id = action.payload.doc.id;
+                return {id, data};
+              });
+            });
+    return this.allGames;
+  }
   newGame(): void {
     this.gameId = this.gameStatus[0].nextgameid;
     this.db.collection('games').add({
       id: this.gameId,
+      startGame: new Date(),
       messages: []
     });
     this.updatedId(this.gameId);
@@ -48,6 +62,13 @@ export class GamesService {
       "active": !this.gameStatus[0].active
     })
   }
+
+  saveMessage(array, id): void {
+    this.db.collection('games').doc(id).update({
+      "messages": array
+    })
+  }
+
 
 
 
