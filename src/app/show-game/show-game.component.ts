@@ -26,7 +26,7 @@ export class ShowGameComponent implements OnInit {
     this.getGameStatus();
     this.getGameNew();
     this.remainingTime = 120;
-    this.countDown();
+
   }
 
 
@@ -40,6 +40,7 @@ export class ShowGameComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.gamesService.getGameById(id)
       .subscribe(game => this.realGame = game);
+
   }
   sendMessage(docId): void {
     this.realGame[0].data.messages.push(this.post);
@@ -55,17 +56,14 @@ export class ShowGameComponent implements OnInit {
   }
 
   countDown() {
-    var time = this.remainingTime;
-    var id = setInterval(discount, 1000);
-    function discount() {
-      if(time == 0) {
-        clearInterval(id);
-        console.log('game end');
-        this.endGame();
-      }else {
-        time--;
-        this.remainingTime = this.remainingTime -1;
-      }
+
+    if(this.remainingTime == 0) {
+      console.log('game end');
+      this.endGame();
+    }else {
+      this.remainingTime --;
+      console.log(this.remainingTime);
+      console.log('still game');
     }
 
   }
