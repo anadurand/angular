@@ -7,7 +7,7 @@
       <h3>Juego número {{gameStatus && gameStatus[0].nextgameid -1}}</h3>
       <div *ngFor="let games of realGame">
         <div class="messages">
-          <p *ngFor= "let message of games.data.messages"> {{message}} </p>
+          <div *ngFor= "let message of games.data.messages" class="col-xs-12 block-message">  </div>
         </div>
       </div>
       <div class="">

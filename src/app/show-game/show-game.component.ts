@@ -26,7 +26,6 @@ export class ShowGameComponent implements OnInit {
   ngOnInit() {
     this.getGameStatus();
     this.getGameNew();
-    this.remainingTime = 120;
     this.showClock();
   }
 
@@ -56,24 +55,22 @@ export class ShowGameComponent implements OnInit {
     this.router.navigate(['/gamesList']);
   }
 
-  //debería llamar a este codigo de setInterval, pero no reconoce al this.countDown y este no reconoce al this.endGame
   showClock() {
-    this.time = setInterval(this.countDown(), 1000);
+    this.remainingTime = 120;
+    console.log(this.remainingTime);
+    this.time = setInterval(this.countDown.bind(this), 1000);
   }
   countDown() {
-
+    this.remainingTime = this.remainingTime - 1;
+    console.log(this.remainingTime);
+    console.log('still game');
     if(this.remainingTime == 0) {
       console.log('game end');
       clearInterval(this.time);
       this.endGame();
-    }else {
-      this.remainingTime --;
-      console.log(this.remainingTime);
-      console.log('still game');
     }
 
   }
-
 
 
 }

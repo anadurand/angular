@@ -5,4 +5,10 @@
   height: 50vh;
   border: 1px solid lightgrey;
   margin-bottom: 30px;
+  overflow-y: scroll;
+}
+.block-message {
+  background-color: lightgray;
+  height: 15px;
+
 }

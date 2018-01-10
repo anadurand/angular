@@ -4,9 +4,11 @@
 </div>
 
 <nav class="container btn-nav">
-  <a class="btn btn-primary" routerLink="/gamesList">Lista de Juegos</a>
-  <a class="btn btn-success" routerLink="/newGame" [class.hidden]="gameStatus && gameStatus[0].active === true"> Nuevo Juego </a>
-  <a class="btn btn-success" routerLink="/showGame/{{gameStatus[0].nextgameid - 1}}" [class.hidden]="gameStatus && gameStatus[0].active === false">Juego en curso</a>
-  {{gameStatus | json}}
+  <div *ngIf="gameStatus">
+    <a class="btn btn-primary" routerLink="/gamesList">Lista de Juegos</a>
+    <a class="btn btn-success" routerLink="/newGame" [class.hidden]="gameStatus && gameStatus[0].active === true"> Nuevo Juego </a>
+    <a class="btn btn-success" routerLink="/showGame/{{gameStatus[0].nextgameid - 1}}" [class.hidden]="gameStatus && gameStatus[0].active === false">Juego en curso</a>
+  </div>
+
 </nav>
 <router-outlet></router-outlet>
